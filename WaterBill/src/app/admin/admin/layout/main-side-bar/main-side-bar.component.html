@@ -1,0 +1,143 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a [routerLink]="['/admin']" class="brand-link">
+    <img src="assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      style="opacity: .8">
+    <span class="brand-text font-weight-light">WaterBill</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="assets/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">{{userFullName}}</a>
+      </div>
+    </div>
+
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <li class="nav-item has-treeview" *ngIf="this.authService.isAuthorizedByRole(['SuperAdmin2','AdminOnly'])">
+          <a class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Rates Maintenance
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/admin/unitmaster']" [routerLinkActive]="['active']" class="nav-link">
+                <i class="far fa-circle nav-icon text-info"></i>
+                <p>Unit Rate</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/admin/maintenancemaster']" [routerLinkActive]="['active']" class="nav-link">
+                <i class="far fa-circle nav-icon text-info"></i>
+                <p>Maintenance</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview" *ngIf="this.authService.isAuthorizedByRole(['SuperAdmin2','AdminOnly'])" >
+          <a class="nav-link">
+            <i class="nav-icon fas fa-id-badge"></i>
+            <p>
+              Manage Member
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/admin/groupmaster']" [routerLinkActive]="['active']" class="nav-link">
+                <i class="far fa-circle nav-icon text-info"></i>
+                <p>Blocks</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/admin/ownermaster']" [routerLinkActive]="['active']" class="nav-link">
+                <i class="far fa-circle nav-icon text-info"></i>
+                <p>Owners</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview" *ngIf="this.authService.isAuthorizedByRole(['SuperAdmin2','AdminOnly'])" >
+          <a class="nav-link">
+            <i class="nav-icon fas fa-credit-card"></i>
+            <p>
+              Billing
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/admin/advancepay']" [routerLinkActive]="['active']" class="nav-link">
+                <i class="far fa-circle nav-icon text-info"></i>
+                <p>Advance Payment</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/admin/adminunits']" [routerLinkActive]="['active']" class="nav-link">
+                <i class="far fa-circle nav-icon text-info"></i>
+                <p>Add Units</p>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+        <li class="nav-item has-treeview" *ngIf="this.authService.isAuthorizedByRole(['SuperAdmin2','AdminOnly'])">
+          <a class="nav-link">
+            <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <p>
+              Reports
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            
+            <li class="nav-item">
+              <a [routerLink]="['/admin/adminpayhistory']" [routerLinkActive]="['active']" class="nav-link">
+                <i class="far fa-circle nav-icon text-info"></i>
+                <p>Show Unpaid Transaction</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a [routerLink]="['/admin/transactionshow']" [routerLinkActive]="['active']" class="nav-link">
+                <i class="far fa-circle nav-icon text-info"></i>
+                <p>Show All Transaction</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" *ngIf="this.authService.isAuthorizedByRole(['UserOnly'])">
+          <a [routerLink]="['/admin/userpay']" [routerLinkActive]="['active']" class="nav-link">
+            <i class="nav-icon fas fa-credit-card"></i>
+            <p>
+              Payment
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/logout']" [routerLinkActive]="['active']" class="nav-link">
+            <i class="nav-icon fas fa-sign-out-alt"></i>
+            <p>
+              Logout
+            </p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

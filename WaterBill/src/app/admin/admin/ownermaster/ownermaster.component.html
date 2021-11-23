@@ -1,0 +1,65 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Owner Details</h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  
+
+  <!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Manage Owner Details</h3>
+                  <a [routerLink]="['/admin/owneradd']" [routerLinkActive]="['active']" class="btn btn-primary float-right">Add New Owner</a>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table datatable class="table table-striped" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>House No.</th>
+                                <th>Owner Name</th>
+                                <th>Mobile No.</th>
+                                <th>Email Id</th>
+                                <th>Details</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="detailList != null || detailList?.length != 0">
+                            <tr *ngFor="let detail of detailList">
+                                <td>{{detail.ownerId}}</td>
+                                <td>{{detail.bunglowNo}}</td>
+                                <td>{{detail.ownerName}}</td>
+                                <td>{{detail.mobile}}</td>
+                                <td>{{detail.emailId}}</td>
+                                <td><a class="btn btn-info" href="#"><i class="fas fa-search"></i>View</a></td>
+                                <td><button class="btn btn-warning btn-sm" (click)="editRow(detail)"><i class="fas fa-pencil-alt"></i>Edit</button></td>
+                                <td><button [ngClass]="detail.isActive ? 'btn btn-danger btn-sm' : 'btn btn-success btn-sm'"
+                                  (click)="deleteRow(detail)"><i [ngClass]="detail.isActive ? 'fas fa-times-circle' : 'fas fa-check-circle'"></i>
+                                  {{detail.isActive ? 'DeActive' : 'Active' }}</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="detailList == null || detailList?.length == 0">
+                          <tr>
+                            <td colspan="5" class="no-data-available">Wait! Data is Processing.......</td>
+                          </tr>
+                        <tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+            
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+<!-- /.content -->

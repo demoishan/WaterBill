@@ -1,0 +1,25 @@
+<h2>This is User home page</h2>
+<hr />
+<button class="btn btn-primary" (click)=fetchUserData()>Fetch Data</button>
+<br />
+<div>
+    <h4>
+        {{userData}}
+    </h4>
+</div>
+<a [routerLink]="['/logout']" class="nav-link">
+    Logout
+</a>
+<br />
+<a [routerLink]="['/user/test1']" class="nav-link">
+    Test1
+</a>
+<a [routerLink]="['/user/test2']" class="nav-link">
+    test2
+</a>
+<a [routerLink]="['/user/test3']" class="nav-link">
+    test2
+</a>
+
+
+<router-outlet></router-outlet>

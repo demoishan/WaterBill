@@ -1,0 +1,157 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Transaction History</h1>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+
+
+<section class="content">
+  <div class="container-fluid">
+    <!-- general form elements -->
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Apply Filter on Following Result</h3>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+      <form #myForm="ngForm" (ngSubmit)="myForm.form.valid && onSubmit()" novalidate>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label><b>Select Block</b></label>
+                <select class="form-control" [(ngModel)]="selectedCity" name="GroupId"
+                  (change)="blockchanged($event.target.value)">
+                  <option *ngFor="let summary of blockList" value={{summary.groupId}}>
+                    {{summary.groupName}}
+                  </option>
+                </select>
+              </div>
+
+            </div>
+            <div class="col-sm-4">
+              <label><b>Select Status</b></label>
+              <select class="form-control" [(ngModel)]="dataModal.BillStatus" name="BillStatus" #BillStatus="ngModel"
+                convert-to-number>
+                <option value=0>All</option>
+                <option value=2>Paid</option>
+                <option value=1>UnPaid</option>
+              </select>
+            </div>
+            <div class="col-sm-4">
+              <label><b>Select Payment Type</b></label>
+              <select class="form-control" [(ngModel)]="dataModal.PaymentType" name="PaymentType" #PaymentType="ngModel"
+                convert-to-number>
+                <option value=0>All</option>
+                <option value=1>Cash</option>
+                <option value=2>Cheque</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label><b> Start Date</b></label>
+                <div class="input-group">
+                  <input type="date" class="form-control" [(ngModel)]="dataModal.StartDate" name="StartDate"
+                    #StartDate="ngModel">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label><b> End Date</b></label>
+                <div class="input-group">
+                  <input type="date" class="form-control" [(ngModel)]="dataModal.EndDate" name="EndDate"
+                    #EndDate="ngModel">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary"><i class="fas fa-filter" style="margin-right: 10px;"></i>Apply
+            Filter</button>
+        </div>
+        <!-- /.card-footer -->
+      </form>
+    </div>
+
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+
+
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"><b>Manage Payment Details</b></h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <table datatable class="table table-striped" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Block</th>
+                <th>House No.</th>
+                <th>Owner Name</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Date of Payment</th>
+                <th>Pay</th>
+                <th>Print</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="detailList != null || detailList?.length != 0">
+              <tr *ngFor="let detail of detailList">
+                <td>{{detail.billId}}</td>
+                <td>{{detail.groupName}}</td>
+                <td>{{detail.bunglowNo}}</td>
+                <td>{{detail.ownerName}}</td>
+                <td>{{detail.total}}</td>
+                <td *ngIf="detail.paymentType==0">UnPaid</td> <td *ngIf="detail.paymentType==1">Cash</td> <td *ngIf="detail.paymentType==2">Cheque</td> <td *ngIf="detail.paymentType==3">Advance</td> <td *ngIf="detail.paymentType==4">User Portal</td>
+                <td>{{detail.paymentDate | date:"d-M-yyyy"}}</td>
+                <td>
+                  <div *ngIf="detail.billStatus==2; then PaidTemplate; else PayTemplate">
+                    <h3>Bill Already Paid</h3>
+                  </div>
+                  <ng-template #PaidTemplate>
+                    <button class="btn btn-primary btn-sm disabled"><i class="fas fa-file-invoice-dollar" style="margin-right: 5px;"></i>Bill Paid</button>
+                  </ng-template>
+                  <ng-template #PayTemplate>
+                    <button type="submit" class="btn btn-primary btn-sm" (click)="editRow(detail)"><i class="fas fa-file-invoice-dollar" style="margin-right: 5px;"></i>Pay Bill</button>
+                    
+                  </ng-template>
+                </td>
+                <td>
+                  <button type="submit" class="btn btn-primary btn-sm" (click)="downloadRow(detail)">PDF</button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="detailList == null || detailList?.length == 0">
+              <tr>
+                <td colspan="5" class="no-data-available">Wait! Data is Processing.......</td>
+              </tr>
+            <tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>
+<!-- /.content -->

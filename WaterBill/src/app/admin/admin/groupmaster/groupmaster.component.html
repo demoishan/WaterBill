@@ -1,0 +1,102 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Block Details</h1>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Enter Block Details</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form #myForm="ngForm" (ngSubmit)="myForm.form.valid && onSubmit();myForm.resetForm()" novalidate>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1"><b>Block Name</b></label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" [(ngModel)]="dataModal.GroupName" name="GroupName"
+                    #GroupName="ngModel" required>
+                  <span class="text-danger"
+                    *ngIf="(GroupName.touched || myForm.submitted) && GroupName.errors?.required">
+                    Group Name is required
+                  </span>
+                </div>
+              </div>
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+              <button type="submit" [disabled]="!myForm.form.valid" class="btn btn-primary"> {{isEditable ? 'Update' : 'Add'}} </button>
+
+              <button type="reset" (click)="onReset()" class="btn btn-warning" style="margin: 10px;"> Reset </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--/.col (left) -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+
+
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"><b>Manage Block Details</b></h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <table datatable class="table table-striped" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr>
+                <td>ID</td>
+                <td>Block Name</td>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="detailList != null || detailList?.length != 0">
+              <tr *ngFor="let detail of detailList">
+                <td>{{detail.groupId}}</td>
+                <td>{{detail.groupName}}</td>
+                <td><button class="btn btn-warning btn-sm" (click)="editRow(detail)"><i class="fas fa-pencil-alt"></i>Edit</button></td>
+                <td>
+                  <button [ngClass]="detail.isActive ? 'btn btn-danger btn-sm' : 'btn btn-success btn-sm'"
+                    (click)="deleteRow(detail)"><i [ngClass]="detail.isActive ? 'fas fa-times-circle' : 'fas fa-check-circle'"></i>
+                    {{detail.isActive ? 'DeActive' : 'Active' }}</button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="detailList == null || detailList?.length == 0">
+              <tr>
+                <td colspan="5" class="no-data-available">Wait! Data is Processing.......</td>
+              </tr>
+            <tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>
+<!-- /.content -->

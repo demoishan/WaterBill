@@ -1,0 +1,2 @@
+﻿Report
+https://code-maze.com/create-pdf-dotnetcore/

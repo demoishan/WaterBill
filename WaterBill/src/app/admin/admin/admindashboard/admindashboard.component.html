@@ -1,0 +1,191 @@
+<section class="content">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-file-invoice-dollar"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text text-center">Unit Rate</span>
+            <span class="info-box-number text-center">
+              <i class="fas fa-rupee-sign" style="margin: 5px;"></i>{{ dataModal.UnitRate }} per One Unit
+            </span>
+          </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-file-invoice-dollar"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text text-center">Penalty</span>
+            <span class="info-box-number text-center">
+              <i class="fas fa-rupee-sign nav-icon" style="margin: 5px;"></i>{{ dataModal.Penalty }} per One Month
+            </span>
+          </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text text-center">Total Member</span>
+            <span class="info-box-number text-center">
+                {{ dataModal.TotalOwner }}
+            </span>
+          </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-info elevation-1"><i class="fas fa-file-invoice-dollar"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text text-center">Advances</span>
+            <span class="info-box-number text-center">
+                {{ dataModal.TotalAdvance }}
+            </span>
+          </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-secondary">
+          <div class="card-header">
+            <h3 class="card-title">Block wise {{ dataModal.Month }}-{{ dataModal.Year }} Paid-Unpaid</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+              </button>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div style="display: block">
+              <canvas baseChart
+                      [datasets]="TotalC"
+                      [labels]="mbarChartLabels"
+                      [options]="barChartOptions"
+                      [colors]="barChartColors"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType"
+                      (chartHover)="barChartHovered($event)"
+                      (chartClick)="barChartClicked($event)"></canvas>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <div class="col-md-6">
+        <div class="card card-secondary">
+          <div class="card-header">
+            <h3 class="card-title">Block wise Overall Unpaid</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+              </button>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div style="display: block">
+              <canvas baseChart
+                      [datasets]="TotalOU"
+                      [labels]="mbarChartLabels"
+                      [options]="barChartOptions"
+                      [colors]="barChartColors"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      
+      <!-- /.col -->
+  </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="info-box mb-3 bg-info">
+            <span class="info-box-icon"><i class="far fa-money-bill-alt"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">{{ dataModal.Month }}-{{ dataModal.Year }} Paid</span>
+              <span class="info-box-number ">{{ dataModal.CurrentPaid }}</span>
+            </div>
+            
+          </div>
+    </div>
+    <div class="col-md-3">
+        <div class="info-box mb-3 bg-info">
+            <span class="info-box-icon"><i class="far fa-money-bill-alt"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">{{ dataModal.Month }}-{{ dataModal.Year }} UnPaid</span>
+              <span class="info-box-number">{{ dataModal.CurrentUnpaid }}</span>
+            </div>
+            
+          </div>
+    </div>
+    <div class="col-md-3">
+        <div class="info-box mb-3 bg-info">
+            <span class="info-box-icon"><i class="fas fa-file-invoice-dollar"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Overall Unpaid</span>
+              <span class="info-box-number">{{ dataModal.OverallUnpaid }}</span>
+            </div>
+            
+          </div>
+    </div>
+    <div class="col-md-3">
+      <div class="info-box mb-3 bg-info">
+          <span class="info-box-icon"><i class="far fa-money-bill-alt"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">{{ dataModal.Month }}-{{ dataModal.Year }} Amt. Received</span>
+            <span class="info-box-number"><i class="fas fa-rupee-sign nav-icon" style="margin: 5px;"></i>{{ dataModal.TotalAmt }}</span>
+          </div>
+          
+        </div>
+    </div>
+      <div class="col-md-12">
+        <div class="card card-secondary">
+          <div class="card-header">
+            <h3 class="card-title">{{ dataModal.Month }}-{{ dataModal.Year }} Block Wise Payment Type</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+              </button>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div style="display: block">
+              <canvas baseChart height=80
+                      [datasets]="TotalP"
+                      [labels]="mbarChartLabels"
+                      [options]="barChartOptions"
+                      [colors]="pbarChartColors"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+    <!-- /.row -->
+  </section>
+<!-- /.content -->

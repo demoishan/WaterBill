@@ -1,0 +1,103 @@
+<section class="content">
+  <div class="container-fluid">
+    <!-- SELECT2 EXAMPLE -->
+
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Enter Student Details</h3>
+      </div>
+      <!-- /.card-header -->
+
+      <form #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && onSubmit()" novalidate>
+        <div class="card-body">
+          <div class="row">
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" [(ngModel)]="userModal.studentName" name="studentName" #studentName="ngModel"
+                  required>
+                <span class="text-danger" *ngIf="(studentName.touched || registerForm.submitted) && studentName.errors?.required">
+                  Name is required
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" [(ngModel)]="userModal.studentEmail" name="studentEmail" #studentEmail="ngModel"
+                  required studentEmail>
+                <span class="text-danger" *ngIf="(studentEmail.touched || registerForm.submitted) && studentEmail.errors?.required">
+                  Email is required
+                </span>
+                <span class="text-danger" *ngIf="studentEmail.touched && studentEmail.errors?.studentEmail">
+                  Enter a valid email address
+                </span>
+
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button type="submit" class="btn btn-primary">ADD </button>
+            <button type="reset" (click)="onReset()" class="btn btn-danger"> Reset </button>
+          </div>
+
+
+        </div>
+        <!-- /.card-body -->
+
+      </form>
+    </div>
+    <!-- /.card -->
+
+  </div><!-- /.container-fluid -->
+</section>
+
+
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Manage Student Details</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <table datatable class="table table-striped" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Email</td>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="usersList != null || usersList?.length != 0">
+              <tr *ngFor="let user of usersList">
+                <td style="width:2%">{{user.studentId}}</td>
+                <td style="width:10%">{{user.studentName}}</td>
+                <td style="width:30%">{{user.studentEmail}}</td>
+                <td> <button (click)="editRow(user)">Edit</button></td>
+                <td><a class="btn btn-danger btn-sm" href="#"><i class="fas fa-trash"></i>Delete</a></td>
+
+              </tr>
+            </tbody>
+            <tbody *ngIf="usersList == null || usersList?.length == 0">
+              <tr>
+                <td colspan="5" class="no-data-available">No data!</td>
+              </tr>
+            <tbody>
+          </table>
+
+        </div>
+        <!-- /.card-body -->
+      </div>
+
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>
+<!-- /.content -->

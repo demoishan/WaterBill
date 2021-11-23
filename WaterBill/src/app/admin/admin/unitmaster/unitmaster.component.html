@@ -1,0 +1,86 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Unit Details</h1>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+
+
+<section class="content">
+  <div class="container-fluid">
+
+    <!-- left column -->
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Enter Unit Details</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form #myForm="ngForm" (ngSubmit)="myForm.form.valid && onSubmit();myForm.resetForm()" novalidate>
+          <div class="card-body">
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 col-form-label"><b>Unit Rate</b></label>
+              <div class="col-sm-4">
+                <input type="number" class="form-control" placeholder="Enter Unit Rate" 
+                [(ngModel)]="dataModal.UnitRate"
+                  name="UnitRate" #UnitRate="ngModel" required>
+                <span class="text-danger" *ngIf="(UnitRate.touched || myForm.submitted) && UnitRate.errors?.required">
+                  UnitRate is required
+                </span>
+
+              </div>
+              <div class="col-sm-6">
+                <div class="card card-secondary text-center">
+                  <div class="card-header">
+                    <h3 class="card-title">Current Unit Rate</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <i class="fas fa-rupee-sign" style="margin: 5px;"></i><b>{{ currentUnitRate }} per One Unit</b>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-2 col-form-label"><b>Penalty</b></label>
+              <div class="col-sm-4">               
+                <input type="number" class="form-control" placeholder="Enter Penalty" 
+                [(ngModel)]="dataModal.Penalty"
+                  name="Penalty" #Penalty="ngModel" required>
+                <span class="text-danger" *ngIf="(Penalty.touched || myForm.submitted) && Penalty.errors?.required">
+                  Penalty is required
+                </span>
+              </div>
+              <div class="col-sm-6">
+                <div class="card card-secondary text-center">
+                  <div class="card-header">
+                    <h3 class="card-title">Current Penalty Rate</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <i class="fas fa-rupee-sign nav-icon" style="margin: 5px;"></i><b>{{ currentPenalty }} per One Month</b>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!myForm.form.valid">Update</button>
+          </div>
+          <!-- /.card-footer -->
+        </form>
+      </div>
+    </div>
+
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>

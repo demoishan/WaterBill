@@ -1,0 +1,50 @@
+<section class="content">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><b>Manage Payment Details</b></h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table datatable class="table table-striped" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Is House-Owner</th>
+                  <th>Email</th>
+                  <th>Role-Type</th>
+                  <th>Roles</th>
+                  <th>Edit</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="detailList != null || detailList?.length != 0">
+                <tr *ngFor="let detail of detailList">
+                  <td>{{detail.userId}}</td>
+                  <td>{{detail.firstName}}</td>
+                  <td>{{detail.lastName}}</td>
+                  <td>{{detail.ownerId}}</td>
+                  <td>{{detail.emailId}}</td>
+                  <td>{{detail.roles}}</td>
+                  <td>{{detail.role}}</td>
+                  <td><button class="btn btn-warning btn-sm" (click)="editRow(detail)"><i class="fas fa-pencil-alt"></i>Edit</button></td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="detailList == null || detailList?.length == 0">
+                <tr>
+                  <td colspan="5" class="no-data-available">Wait! Data is Processing.......</td>
+                </tr>
+              <tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+  
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->

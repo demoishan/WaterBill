@@ -1,0 +1,126 @@
+<section class="content">
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-file-invoice-dollar"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text text-center">Unit Rate</span>
+          <span class="info-box-number text-center">
+            <i class="fas fa-rupee-sign" style="margin: 5px;"></i>{{ UnitRate }} per One Unit
+          </span>
+        </div>
+      </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-file-invoice-dollar"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text text-center">Penalty</span>
+          <span class="info-box-number text-center">
+            <i class="fas fa-rupee-sign nav-icon" style="margin: 5px;"></i>{{ Penalty }} per One Month
+          </span>
+        </div>
+      </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-calendar-alt"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text text-center">Current Month</span>
+          <span class="info-box-number text-center">
+              {{ Month }}-{{ Year }}
+          </span>
+        </div>
+      </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-file-invoice-dollar"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text text-center">Current Due</span>
+          <span class="info-box-number text-center">
+              2000
+          </span>
+        </div>
+      </div>
+  </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-secondary">
+        <div class="card-header">
+          <h3 class="card-title">Last 12 Months Water Units Used</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+            </button>
+          </div>
+          <!-- /.card-tools -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div style="display: block">
+            <canvas baseChart height=80
+                    [datasets]="TotalU"
+                    [labels]="mbarChartLabels"
+                    [options]="barChartOptions"
+                    [colors]="pbarChartColors"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><b>Payment History</b></h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+              <table datatable class="table table-striped" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Date</th>
+                          <th>Type</th>
+                          <th>Cheque No.</th>
+                          <th>Amount</th>
+                          <th>PDF</th>
+                      </tr>
+                  </thead>
+                  <tbody *ngIf="detailList != null || detailList?.length != 0">
+                      <tr *ngFor="let detail of detailList">
+                          <td>{{ detail.billId }}</td>
+                          <td>{{ detail.paymentDate | date:"d-M-yyyy" }}</td>
+                          <td *ngIf="detail.paymentType==1">Cash</td> <td *ngIf="detail.paymentType==2">Cheque</td> <td *ngIf="detail.paymentType==3">Advance</td> <td *ngIf="detail.paymentType==4">User Portal</td>
+                          <td>{{ detail.chequeNo }}</td>
+                          <td>{{ detail.amount }}</td>
+                          <td><button type="submit" class="btn btn-primary btn-sm" (click)="downloadRow(detail)">PDF</button></td>
+                      </tr>
+                  </tbody>
+                  <tbody *ngIf="detailList == null || detailList?.length == 0">
+                    <tr>
+                      <td colspan="5" class="no-data-available">Wait! Data is Processing.......</td>
+                    </tr>
+                  <tbody>
+              </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+    </div>
+  </div>
+  <!-- /.row -->
+</section>
+<!-- /.content -->

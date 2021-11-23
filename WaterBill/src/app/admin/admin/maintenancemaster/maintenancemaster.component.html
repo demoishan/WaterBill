@@ -1,0 +1,129 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Maintenance Details</h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+      <!-- SELECT2 EXAMPLE -->
+      
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Enter Maintenance Details</h3>
+        </div>
+        <!-- /.card-header -->
+        
+        <form #myForm="ngForm" (ngSubmit)="myForm.form.valid && onSubmit();myForm.resetForm()" novalidate>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="col-form-label"><b>Select Block</b></label>
+                <select class="form-control" [(ngModel)]="selectedCity" name="GroupId" (change)="blockchanged($event.target.value)">
+                  <option *ngFor="let summary of blockList" value={{summary.groupId}}>
+                    {{summary.groupName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="col-form-label"><b>Maintenance Name</b></label>
+                <input type="text" class="form-control" [(ngModel)]="dataModal.MaintenanceName" name="MaintenanceName"
+                    #MaintenanceName="ngModel" required>
+                  <span class="text-danger"
+                    *ngIf="(MaintenanceName.touched || myForm.submitted) && MaintenanceName.errors?.required">
+                    Maintenance Name is required
+                  </span>
+              </div>
+              </div>
+              <div class="col-md-4">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="col-form-label"><b>Amount</b></label>
+                <input type="number" class="form-control" [(ngModel)]="dataModal.Amount" name="Amount"
+                    #Amount="ngModel" required>
+                  <span class="text-danger"
+                    *ngIf="(Amount.touched || myForm.submitted) && Amount.errors?.required">
+                    Maintenance Amount is required
+                  </span>
+              </div>
+            </div>
+        </div>
+        
+            <div>
+              <button type="submit" class="btn btn-primary" [disabled]="!myForm.form.valid"> {{isEditable ? 'Update' : 'Add'}} </button>
+
+              <button type="reset" (click)="onReset()" class="btn btn-warning" style="margin: 10px;"> Reset </button>
+            </div>
+        
+            
+        </div>
+        <!-- /.card-body -->
+          
+          </form>
+      </div>
+      <!-- /.card -->
+      
+
+
+         
+    </div><!-- /.container-fluid -->
+  </section>  
+
+
+  <section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Manage Maintenance Details</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table datatable class="table table-striped" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Maintenance Name</th>
+                                <th>master</th>
+                                <th>Amount</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="detailList != null || detailList?.length != 0">
+                            <tr *ngFor="let detail of detailList">
+                                <td>{{detail.maintenanceId}}</td>
+                                <td>{{detail.maintenanceName}}</td>
+                                <td>{{detail.groupName}}</td>
+                                <td>{{detail.amount}}</td>
+                                <td><button class="btn btn-warning btn-sm" (click)="editRow(detail)"><i class="fas fa-pencil-alt"></i>Edit</button></td>
+                                <td><button [ngClass]="detail.isActive ? 'btn btn-danger btn-sm' : 'btn btn-success btn-sm'"
+                                  (click)="deleteRow(detail)"><i [ngClass]="detail.isActive ? 'fas fa-times-circle' : 'fas fa-check-circle'"></i>
+                                  {{detail.isActive ? 'DeActive' : 'Active' }}</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="detailList == null || detailList?.length == 0">
+                          <tr>
+                            <td colspan="5" class="no-data-available">Processing! Please Wait.....</td>
+                          </tr>
+                        <tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+            
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+<!-- /.content -->

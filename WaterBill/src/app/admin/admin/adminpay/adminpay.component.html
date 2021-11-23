@@ -1,0 +1,171 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Do Payment</h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+</section>
+  
+  <section class="content">
+    <div class="container-fluid">
+        
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Add Payment</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" #myForm="ngForm" (ngSubmit)="myForm.form.valid && onSubmit();myForm.resetForm()" novalidate>
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-sm-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label><b>Block</b></label>
+                              <input type="text" class="form-control"  [(ngModel)]="dataModal.GroupName"
+                                name="GroupName" #GroupName="ngModel" disabled>
+                            </div>
+                          </div>
+                          <div class="col-sm-3">
+                            <div class="form-group">
+                              <label><b>House No.</b></label>
+                              <input type="text" class="form-control"  [(ngModel)]="dataModal.BunglowNo"
+                                name="BunglowNo" #BunglowNo="ngModel" disabled>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label><b>Owner Name</b></label>
+                              <input type="text" class="form-control"  [(ngModel)]="dataModal.OwnerName"
+                                name="OwnerName" #OwnerName="ngModel" disabled>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label><b>Previous Unit</b></label>
+                              <input type="text" class="form-control"  [(ngModel)]="dataModal.LastUnit"
+                                name="LastUnit" #LastUnit="ngModel" disabled>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                          <!-- text input -->
+                          <div class="form-group">
+                            <label><b>Current Unit</b></label>
+                            <input type="text" class="form-control"  [(ngModel)]="dataModal.CurrentUnit"
+                                name="CurrentUnit" #CurrentUnit="ngModel" disabled>
+                          </div>
+                      </div>
+                          <div class="col-sm-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label><b>Maintenance</b></label>
+                              <input type="text" class="form-control"  [(ngModel)]="dataModal.Maintenance"
+                                name="Maintenance" #Maintenance="ngModel" disabled>
+                            </div>
+                          </div>
+                          <div class="col-sm-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label><b>Pending Amount</b></label>
+                              <input type="text" class="form-control" placeholder="" disabled>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <!-- text input -->
+                          <div class="form-group">
+                            <label><b>Penalty</b></label>
+                            <input type="text" class="form-control" placeholder="" disabled>
+                          </div>
+                      </div>
+                          <div class="col-sm-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label><b>Total Amount</b></label>
+                              <input type="text" class="form-control"  [(ngModel)]="dataModal.Total"
+                                name="Total" #Total="ngModel" disabled>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label><b>Payment Type</b></label>
+                                <select class="form-control" [(ngModel)]="dataModal.PaymentType" 
+                                name="PaymentType" #PaymentType="ngModel" convert-to-number required>
+                                  <option  value=1>Cash</option>
+                                  <option  value=2>Cheque</option>
+                                </select>
+                                <span class="text-danger"
+                                  *ngIf="(PaymentType.touched || myForm.submitted) && PaymentType.errors?.required">
+                                    You must select one.
+                                </span>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="row" *ngIf="dataModal.PaymentType == 2">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                              <label><b>Bank Name</b></label>
+                              <input type="text" class="form-control"  [(ngModel)]="dataModal.BankName"
+                                name="BankName" #BankName="ngModel" placeholder="Enter Bank Name">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                              <label><b>Branch Name</b></label>
+                              <input type="text" class="form-control"  [(ngModel)]="dataModal.BranchName"
+                                name="BranchName" #BranchName="ngModel" placeholder="Enter Branch Name">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                              <label><b>Cheque No.</b></label>
+                              <input type="text" class="form-control"  [(ngModel)]="dataModal.ChequeNo"
+                                name="ChequeNo" #ChequeNo="ngModel" placeholder="Enter Cheque No.">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                              <label><b>Cheque Date</b></label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                  </span>
+                                </div>
+                                <input type="date" class="form-control float-right"  [(ngModel)]="dataModal.ChequeDate"
+                                name="ChequeDate" #ChequeDate="ngModel" id="reservation">
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">
+                    <div *ngIf="dataModal.BillStatus==2; then PaidTemplate; else PayTemplate">
+                        <h3>Bill Already Paid</h3>
+                    </div>
+                    <ng-template #PaidTemplate>
+                      <h3>Bill Already Paid</h3>
+                    </ng-template>
+                    <ng-template #PayTemplate>
+                      <button type="submit" class="btn btn-primary" [disabled]="!myForm.form.valid">Submit Payment</button>
+                  </ng-template>
+                  </div>
+                  <!-- /.card-footer -->
+                </form>
+            </div>
+          
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>

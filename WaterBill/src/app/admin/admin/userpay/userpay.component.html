@@ -1,0 +1,143 @@
+<section class="content">
+    <div class="row">
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title"><b>Payment Due History</b></h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table datatable class="table table-striped" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Month</th>
+                                <th>Amount</th>
+                                <th>Maintenance</th>
+                                <th>Penalty</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="detailList != null || detailList?.length != 0">
+                            <tr *ngFor="let detail of detailList">
+                                <td>{{ detail.billId }}</td>
+                                <td>{{ detail.month }}</td>
+                                <td>{{ detail.waterBillAmount }}</td>
+                                <td>{{ detail.maintenance }}</td>
+                                <td>{{ detail.penalty }}</td>
+                                <td>{{ detail.total }}</td>
+                            </tr>   
+                        </tbody>
+                        <tbody *ngIf="detailList == null || detailList?.length == 0">
+                          <tr>
+                            <td colspan="5" class="no-data-available">Wait! Data is Processing.......</td>
+                          </tr>
+                        <tbody>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th>Total</th>
+                                <th>{{ TotalMonth }}</th>
+                                <th>{{ TotalBillAmount }}</th>
+                                <th>{{ TotalMaintenance }}</th>
+                                <th>{{ TotalPenalty }}</th>
+                                <th>{{ GrandTotal }}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+            
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+<!-- /.content -->
+
+
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Do Payment</h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <!-- SELECT2 EXAMPLE -->
+      
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Enter Card Details</h3>
+        </div>
+        <!-- /.card-header -->
+        
+        <form role="form" #myForm="ngForm" (ngSubmit)="myForm.form.valid && onSubmit();myForm.resetForm()" novalidate>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="col-form-label"><b>Select Bank</b></label>
+                <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">HDFC Bank</option>
+                    <option>IDFC Bank</option>
+                    <option>Bank of Baroda</option>
+                    <option>State Bank of India</option>
+                    <option>Kotak Bank</option>
+                  </select>
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="col-form-label"><b>Enter Details</b></label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Card Details">
+              </div>
+              </div>
+              <div class="col-md-4">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="col-form-label"><b>Amount</b></label>
+                <input type="email" [(ngModel)]="GrandTotal" class="form-control" name="GrandTotal"
+                   disabled>
+              </div>
+            </div>
+        </div>
+        
+              <div>
+                <div class="col-6">
+                    <p class="lead">Payment Methods:</p>
+                    <img src="assets/img/credit/visa.png" alt="Visa">
+                    <img src="assets/img/credit/mastercard.png" alt="Mastercard">
+                    <img src="assets/img/credit/american-express.png" alt="American Express">
+                    <img src="assets/img/credit/paypal2.png" alt="Paypal">
+                  </div>
+                <button type="submit" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
+                    Payment
+                  </button>
+            </div>
+        
+            
+        </div>
+        <!-- /.card-body -->
+          
+          </form>
+      </div>
+      <!-- /.card -->
+      
+
+
+         
+    </div><!-- /.container-fluid -->
+  </section>  
